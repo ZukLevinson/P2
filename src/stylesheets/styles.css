@@ -97,7 +97,10 @@ input:-webkit-autofill:active {
     height: 100%;
     float: right;
     padding-left: 20px;
+    padding-right: 20px;
     box-sizing: border-box;
+    display: flex;
+    flex-flow: column;
 }
 
 /*Chat - side menu*/
@@ -149,13 +152,16 @@ input:-webkit-autofill:active {
     margin-bottom: 10px;
     overflow: hidden;
 }
-.information:hover{
+
+.information:hover {
     overflow: auto;
 }
+
 /*Custom scroll bar*/
 ::-webkit-scrollbar {
     width: 2px;
 }
+
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 1px;
@@ -171,6 +177,7 @@ input:-webkit-autofill:active {
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
 /*END*/
 
 /*Information - message cell*/
@@ -181,17 +188,115 @@ input:-webkit-autofill:active {
 .information .message {
     width: 100%;
     font-size: 10px;
+    padding-right:10px;
 }
 
 .information .room\+time {
     font-size: 14px;
     font-weight: bold;
 }
+
 /*END*/
 
 /*Footer*/
-.footer{
-    margin-top:15px;
-    font-size:10px;
-    color:darkgray;
+.footer {
+    margin-top: 15px;
+    font-size: 10px;
+    color: darkgray;
+}
+
+/*END*/
+
+.line{
+    width:3px;
+    height:40px;
+    background-color: #555555;
+}
+
+/*Chat - messenger window*/
+.chat .header{
+    width:100%;
+    height:100px;
+    background-image: linear-gradient(to top, transparent, #FEFEFF);
+    float:right;
+    text-align: right;
+    display: block;
+    flex: 0 1 auto;
+}
+.header .title{
+    font-size: 16px;
+}
+
+table{
+    margin:0;
+    padding:0;
+    border-collapse: collapse;
+}
+.communication{
+    width:100%;
+    flex: 1 1 auto;
+    overflow: auto;
+    position: relative;
+}
+.chat .messenger{
+    width:100%;
+    background-image: linear-gradient(to top, transparent, #FEFEFF);
+    text-align: justify;
+    display: flex;
+    flex: 0 1 auto;
+    padding-bottom:10px;
+    padding-top:10px;
+    position: relative; /* anything but static */
+}
+.chat .messenger textarea{
+    background-color: darkgray;
+    outline:none;
+    border:none;
+    resize: none;
+    overflow: hidden;
+    border-radius: 20px;
+    padding:5px;
+    margin-right: 10px;
+}
+.chat .messenger button{
+    background-color: transparent;
+    border:none;
+    outline:none;
+    cursor: pointer;
+    width:30px;
+    text-align: center;
+}
+.chat .messenger button:hover{
+    font-weight: bold;
+}
+.fade_down{
+    position:sticky;
+    bottom:0;
+    width:100%;
+    height:40px;
+    background-image: linear-gradient(to bottom, transparent, #FEFEFF);
+}
+.fade_up{
+    position:sticky;
+    top:0;
+    width:100%;
+    height:40px;
+    background-image: linear-gradient(to bottom, #FEFEFF, transparent);
+}
+.example{
+    flex: 1 1 auto;
+}
+.communication .time {
+    font-size: 10px;
+}
+
+.communication .message {
+    width: 100%;
+    font-size: 10px;
+    padding-right:10px;
+}
+
+.communication .room\+time {
+    font-size: 14px;
+    font-weight: bold;
 }
