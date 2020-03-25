@@ -3,7 +3,18 @@
 
     session_start();
 
+    $conn = open_conn();
+    $token = $_COOKIE['auth-token'];
+    $secret = file_get_contents('../../apis/auth/private/secret.txt');
+
+    $_SESSION['current-chat'] = !isset($_GET['chat']) ? 0 : $_GET['chat'];
+    $s = 1;
+    if (isset($_POST['message'])) {
+        send_message($conn,$_SESSION['user-id'],$_POST['message'], $s/*$_SESSION['current-chat']*/);
+    }
+    close_conn($conn);
 ?>
+
 <html lang="en">
 <head>
     <title>CHTR</title>
@@ -30,177 +41,8 @@
         </div>
         <div class="information">
             <table style="width:100%;">
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
+
+                <?php get_chats(open_conn(), validate($_COOKIE['auth-token'],$secret)); ?>
 
             </table>
         </div>
@@ -212,267 +54,41 @@
         <div class="header">
             <table style="width:100%;height:40px;">
                 <tr>
-                    <td rowspan="2">
-                        <div class="line">
-
-                        </div>
+                    <td rowspan="2" width="8px">
+                        <div class="line"></div>
                     </td>
                     <td>
-                        <a class="title" style="font-size: 26px;">Chat #1</a>
+                        <a class="title" style="font-size: 26px;"><?php echo get_chat_name(open_conn(),$_SESSION['current-chat']);?></a>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <a>User #42, User #90, User #78</a>
+                        <a><?php echo get_users(open_conn(), $_SESSION['current-chat']); ?></a>
                     </td>
                 </tr>
             </table>
         </div>
-        <div class="communication">
+
+        <div class="communication" id="chat">
             <div class="fade_up">
 
             </div>
-            <table style="width:100%;">
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%;">
-                        <table style="margin-bottom:20px;" height="60px">
-                            <tr>
-                                <td class="room+time">
-                                    Chat #1 @ 12:04
-                                </td>
-                                <td class="photo" rowspan="2" width="100px">
-                                    <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="message">
-                                    <b>User #42:</b> Message number 189 jkda jkan akj akj ekj akje kj
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
 
-            </table>
+            <?php get_messages(open_conn(), $_SESSION['current-chat']); ?>
+
             <div class="fade_down">
 
             </div>
         </div>
 
-        <div class="messenger">
-            <textarea style="width:100%;display: inline-block;"></textarea>
+        <form class="messenger" method="post" action="index.php">
+            <textarea name="message" style="width:100%;display: inline-block;"></textarea>
             <button type="submit" style="display: inline-block;">Send</button>
-        </div>
+        </form>
     </div>
 </div>
+<script>
+    document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
+</script>
 </body>
 </html>
