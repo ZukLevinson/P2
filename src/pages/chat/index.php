@@ -4,13 +4,22 @@
     session_start();
 
     $conn = open_conn();
-    $token = $_COOKIE['auth-token'];
+    if (!isset($_COOKIE['auth-token'])) {
+        header('Location: ../../');
+        exit;
+    } else {
+        $token = $_COOKIE['auth-token'];
+    }
     $secret = file_get_contents('../../apis/auth/private/secret.txt');
 
-    $_SESSION['current-chat'] = !isset($_GET['chat']) ? 0 : $_GET['chat'];
-    $s = 1;
+    if (isset($_GET['chat'])) {
+        $_SESSION['current-chat'] = $_GET['chat'];
+    } else {
+        $_SESSION['current-chat'] = 0;
+    }
+
     if (isset($_POST['message'])) {
-        send_message($conn,$_SESSION['user-id'],$_POST['message'], $s/*$_SESSION['current-chat']*/);
+        send_message($conn, $_SESSION['user-id'], $_POST['message'], $_SESSION['current-chat']);
     }
     close_conn($conn);
 ?>
@@ -42,7 +51,7 @@
         <div class="information">
             <table style="width:100%;">
 
-                <?php get_chats(open_conn(), validate($_COOKIE['auth-token'],$secret)); ?>
+                <?php get_chats(open_conn(), $_SESSION['user-id']); ?>
 
             </table>
         </div>
@@ -54,11 +63,12 @@
         <div class="header">
             <table style="width:100%;height:40px;">
                 <tr>
-                    <td rowspan="2" width="8px">
+                    <td rowspan="2" style="width:8px;">
                         <div class="line"></div>
                     </td>
                     <td>
-                        <a class="title" style="font-size: 26px;"><?php echo get_chat_name(open_conn(),$_SESSION['current-chat']);?></a>
+                        <a class="title"
+                           style="font-size: 26px;"><?php echo get_chat_name(open_conn(), $_SESSION['current-chat']); ?></a>
                     </td>
                 </tr>
                 <tr>
@@ -81,8 +91,10 @@
             </div>
         </div>
 
-        <form class="messenger" method="post" action="index.php">
-            <textarea name="message" style="width:100%;display: inline-block;"></textarea>
+        <form class="messenger" method="post">
+            <label style="width:100%;">
+                <textarea name="message" style="width:100%;display: inline-block;"></textarea>
+            </label>
             <button type="submit" style="display: inline-block;">Send</button>
         </form>
     </div>

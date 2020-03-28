@@ -279,14 +279,14 @@ table{
     font-weight: bold;
 }
 .fade_down{
-    position:absolute;
+    position:sticky;
     bottom:0;
     width:100%;
     height:40px;
     background-image: linear-gradient(to bottom, transparent, #FEFEFF);
 }
 .fade_up{
-    position:absolute;
+    position:sticky;
     top:0;
     width:100%;
     height:40px;

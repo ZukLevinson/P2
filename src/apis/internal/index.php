@@ -1,6 +1,4 @@
 <?php
-
-
     function open_conn()
     {
         $db_host = '192.168.1.17';
@@ -80,30 +78,34 @@ EOT;
     {
         $sql = "SELECT Chats FROM Users WHERE UserID = $user_id";
         $result = mysqli_query($conn, $sql);
-        $chats = explode(',', mysqli_fetch_array($result)['Chats']);
 
+        $chats = explode(',', mysqli_fetch_array($result)['Chats']);
         foreach ($chats as $chat_id) {
-            $sql = "SELECT * FROM Chat_$chat_id";
+            $sql = "SELECT Image FROM Chats_Info WHERE ID=$chat_id";
+            $image = mysqli_fetch_array(mysqli_query($conn, $sql))['Image'];
+            $sql = "SELECT * FROM Chat_$chat_id ORDER BY ID DESC LIMIT 1";
             $result = mysqli_query($conn, $sql);
-            if ($result) {
+
+            $chat_name = get_chat_name($conn, $chat_id);
+
+            if (mysqli_num_rows($result) != 0) {
                 $row = mysqli_fetch_array($result);
 
                 $text = $row['Text'];
                 $time = $row['Time'];
                 $sender = get_username($conn, $row['Sender']);
 
-                $chat_name = get_chat_name($conn, $chat_id);
 
                 echo <<<EOT
                     <tr onclick="window.location='?chat=$chat_id'">
                         <td style="width:100%;">
-                            <table style="margin-bottom:20px;" height="60px">
+                            <table style="margin-bottom:20px;" style="height:60px;">
                                 <tr>
                                     <td class="room+time">
                                         $chat_name @ $time
                                     </td>
-                                    <td class="photo" rowspan="2" width="100px">
-                                        <img width="60px" height="60px" src="../../../coffe-latte-100-arabica.jpg">
+                                    <td class="photo" rowspan="2" style="width:100px;">
+                                        <img width="60px" height="60px" src="../../files/images/status/$image" alt="$chat_name Status">
                                     </td>
                                 </tr>
                                 <tr>
@@ -115,8 +117,32 @@ EOT;
                         </td>
                     </tr>
 EOT;
+            } else {
+                echo <<<EOT
+                    <tr onclick="window.location='?chat=$chat_id'">
+                        <td style="width:100%;">
+                            <table style="margin-bottom:20px;" style="height:60px;">
+                                <tr>
+                                    <td class="room+time">
+                                        $chat_name
+                                    </td>
+                                    <td class="photo" rowspan="2" style="width:100px;">
+                                        <img width="60px" height="60px" src="../../files/images/status/$image" alt="$chat_name Status">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="message">
+                                        <b>No Massages</b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+EOT;
+
             }
         }
+
     }
 
     function get_users($conn, $chat_id)

@@ -12,7 +12,7 @@
         if (validate($token,$secret) != null) {
             $_SESSION['user-id'] = validate($token, $secret);
             $_COOKIE['login-status'] = 'logged';
-            header('Location:../../pages/chat/');
+            header('Location:../../pages/chat/?chat=0');
         } else {
             header('Location:../../pages/sign/');
         }
@@ -42,12 +42,12 @@
 
                 setcookie('login-time', date('Y/m/d H:i:s'), time()+3600, '/', NULL, 0);
 
-                header('Location:../../pages/chat/');
+                header('Location:../../pages/chat/?chat=0');
             } else {
                 $_SESSION['login-error'] = 'Username or password are incorrect.';
                 header('Location:../../pages/sign/');
             }
-        }else {
+//        }else {
             $_SESSION['login-error'] = 'Enter username and password.';
             header('Location:../../pages/sign/');
         }

@@ -4,7 +4,7 @@
     session_start();
 
     if (isset($_COOKIE['auth-token'])) {
-        header('Location: ../pages/chat?auth-token=' . $_COOKIE['auth-token']);
+        header('Location: ../chat/?chat=0');
     } else {
         unset($_COOKIE['login-time']);
         setcookie('login-time', null, -1, '/');
