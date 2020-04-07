@@ -28,7 +28,7 @@
 <head>
     <title>CHTR</title>
     <link rel="stylesheet" type="text/css" href="../../stylesheets/styles.css">
-</head>
+<!--</head>-->
 <body>
 <div>
     <div class="side_menu inline">

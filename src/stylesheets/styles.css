@@ -131,7 +131,6 @@ input:-webkit-autofill:active {
 
 .menu > div:hover {
     border-top-width: 2px;
-    background-color: dimgray;
 }
 
 .menu > div a {
@@ -141,8 +140,7 @@ input:-webkit-autofill:active {
 }
 
 .menu > div:hover {
-    font-weight: bold;
-    letter-spacing: 1px;
+    text-decoration: underline;
 }
 
 .information {
@@ -309,4 +307,8 @@ table{
     font-size: 14px;
     font-weight: bold;
     padding-right:10px;
+}
+
+.photo img{
+    border-radius: 50%;
 }

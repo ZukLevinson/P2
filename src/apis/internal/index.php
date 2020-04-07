@@ -97,7 +97,7 @@ EOT;
 
 
                 echo <<<EOT
-                    <tr onclick="window.location='?chat=$chat_id'">
+                    <tr onclick="window.location='?chat=$chat_id'" style="cursor:pointer;">
                         <td style="width:100%;">
                             <table style="margin-bottom:20px;" style="height:60px;">
                                 <tr>
@@ -127,7 +127,7 @@ EOT;
                                         $chat_name
                                     </td>
                                     <td class="photo" rowspan="2" style="width:100px;">
-                                        <img width="60px" height="60px" src="../../files/images/status/$image" alt="$chat_name Status">
+                                        <img style="width:60px; height:60px;" src="../../files/images/status/$image" alt="$chat_name Status">
                                     </td>
                                 </tr>
                                 <tr>
